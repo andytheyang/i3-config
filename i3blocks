@@ -1,0 +1,48 @@
+# i3blocks config - andy
+#
+# SIGNALS && pkill -RTMIN+1 i3blocks
+# 10 = volume button
+# 12 = network status change
+
+# separator_block_width=25
+separator_block_width=50
+markup=none
+command=~/.i3blocks/$BLOCK_NAME		# default command (script mode)
+# border=#FF0000
+
+[disk]
+label=
+command=df -h | grep /dev/nvme0n1p5 | awk '{print $4}'
+interval=120
+
+[wifi]
+label=
+interval=15
+signal=12
+
+
+[temp]
+# label= 
+interval=3
+
+[battery]
+# label= 
+interval=60
+
+[volume]
+# label=  
+interval=once
+signal=10
+
+# [date]
+# label= 
+# command=date '+%b %d'
+# interval=once
+
+[time]
+label=
+command=date '+%b %d %l:%M:%S %P'
+interval=1
+
+
+# NEED A NEWLINE AFTER THIS OR ELSE I3BLOCKS WILL CRASH

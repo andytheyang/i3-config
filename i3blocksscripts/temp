@@ -1,0 +1,19 @@
+#!/bin/zsh
+# use zsh to calculate math
+
+# get temperature using lm-sensors
+TEMP=$(sensors | grep Package | awk '{print $4}' | tr -d "+°C")
+
+if [[ $TEMP -ge 75 ]]; then
+	echo " $TEMP°C"
+	echo " $TEMP°C"
+	echo "#FF0000"		# red for > 75deg
+elif [[ $TEMP -ge 60 ]]; then
+	echo " $TEMP°C"
+	echo " $TEMP°C"
+	echo "#FFF600"		# yellow for > 60deg
+elif [[ $TEMP -ge 40 ]]; then
+	echo " $TEMP°C"
+else					# less than 30deg
+	echo " $TEMP°C"
+fi

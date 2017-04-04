@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# auto detect:
+# INTERFACE=$(ip token | awk '{print $4}')
+INTERFACE="wlp58s0"
+
+# exit if wifi is down
+if [[ ! -d /sys/class/net/${INTERFACE}/wireless ]] ||
+    [[ "$(cat /sys/class/net/$INTERFACE/operstate)" = 'down' ]]; then
+    echo "disc"
+    echo "disc"
+    echo "#FF0000"
+    exit
+fi
+
+# get network quality as a fraction
+QUALITY=$(grep $INTERFACE /proc/net/wireless | awk '{ print int($3 * 100 / 70) }')
+
+# iwgetid -r
+SSID=$(iwgetid -r)
+
+echo $SSID $QUALITY%	# full text
+echo $QUALITY%		# short text
+
+# change color and icon depending on network quality
+if [[ $QUALITY -ge 80 ]]; then		# green for >80%
+    echo "#00FF00"
+elif [[ $QUALITY -ge 40 ]]; then	# yellow for >60%
+    echo "#FFF600"
+# elif [[ $QUALITY -ge 40 ]]; then	# orange for >40%
+#     echo "#FFAE00"
+else
+    echo "#FF0000"					# red for 0-40%
+fi

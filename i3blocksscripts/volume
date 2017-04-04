@@ -1,0 +1,19 @@
+#!/bin/bash
+
+
+# get information string containing mute status
+
+INFO=$(amixer get Master | tail -n1 | awk '{print $5 " " $6}' | tr -d "[]")
+STATE=$(echo $INFO | awk '{print $2}')
+VOL=$(echo $INFO | awk '{print $1}')
+
+
+if [ $STATE != "on" ]; then	# MUTED
+	echo " mute"		# full text
+	echo " mute"		# small text
+	echo "#FF0000"	# red color if muted
+else							# UNMUTED
+	echo " $VOL"		# full text
+fi
+
+# echo "${STATE}"
