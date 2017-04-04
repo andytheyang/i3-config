@@ -4,8 +4,7 @@
 # 10 = volume button
 # 12 = network status change
 
-# separator_block_width=25
-separator_block_width=50
+separator_block_width=25
 markup=none
 command=~/.i3blocks/$BLOCK_NAME		# default command (script mode)
 # border=#FF0000

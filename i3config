@@ -199,8 +199,7 @@ bar {
 	position bottom
 	separator_symbol ""
 	strip_workspace_numbers yes
-	height 80
-	# border #FFFFFF
+	height 40		# REPLACE
 
 	colors {
 		background $back
@@ -240,7 +239,7 @@ hide_edge_borders smart
 ### EXEC ###
 
 # HIDPI OPTIONS
-exec --no-startup-id xrandr --dpi 240
+# exec --no-startup-id xrandr --dpi 240
 
 # disable trackpad tap registration after typing
 exec --no-startup-id syndaemon -i 0.2 -K -R -d
