@@ -1,4 +1,8 @@
 # i3 config file (v4)
+#
+# Andy Yang
+# 
+# Packages used:
 # i3-gaps
 # i3pystatus
 # gnome
@@ -14,6 +18,8 @@
 # adobe-source-sans-pro
 # ttf-font-awesome
 
+# HIDPI OPTIONS
+exec --no-startup-id xrandr --dpi 240
 
 
 ### KEY CONFIG ###
@@ -29,14 +35,13 @@ font pango:Source Sans Pro, FontAwesome 12
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec --no-startup-id i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # start i3-dmenu-desktop (a program launcher)
 bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -i -l 10 -p "run:" -fn "Source Sans Pro" -sb "#33363a" -sf "#ff7c3a"'
-# bindsym $mod+d exec rofi -show run -lines 10 -eh 2
 
 # change focus
 bindsym $mod+j focus left
@@ -199,7 +204,7 @@ bar {
 	position bottom
 	separator_symbol ""
 	strip_workspace_numbers yes
-	height 40		# REPLACE
+	height 80		# REPLACE
 
 	colors {
 		background $back
@@ -217,14 +222,17 @@ bar {
 
 #class                  border      backgr.     text        split
 client.focused          $orange		$orange		$white		$orange
-client.focused_inactive $grey		$grey		$lightgrey	$grey
-client.unfocused        $grey		$grey		$lightgrey	$grey
-client.urgent           $yellow		$yellow		$black		$yellow
+client.focused_inactive $grey		$grey		$white		$grey
+client.unfocused        $grey		$grey		$white		$grey
+client.urgent           $yellow		$yellow		$white		$yellow
 client.background       $back
 
 # no titlebar
-new_window pixel 3
-new_float pixel 3
+# new_window pixel 3
+# new_float pixel 3
+
+# makes sure every window gets a border regardless
+for_window [class=".*"] border pixel 3
 
 # hide edge borders if only one window
 hide_edge_borders smart
@@ -237,9 +245,6 @@ hide_edge_borders smart
 
 
 ### EXEC ###
-
-# HIDPI OPTIONS
-# exec --no-startup-id xrandr --dpi 240
 
 # disable trackpad tap registration after typing
 exec --no-startup-id syndaemon -i 0.2 -K -R -d
@@ -258,5 +263,8 @@ exec --no-startup-id owncloud
 
 # enable gnome-settings-daemon for gnome applications
 exec --no-startup-id /usr/lib64/gnome-settings-daemon/gnome-settings-daemon
+
+# start compositor
+exec --no-startup-id compton --vsync opengl --backend glx
 
 ### END EXEC ###

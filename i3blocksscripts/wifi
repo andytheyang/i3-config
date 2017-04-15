@@ -18,6 +18,7 @@ QUALITY=$(grep $INTERFACE /proc/net/wireless | awk '{ print int($3 * 100 / 70) }
 
 # iwgetid -r
 SSID=$(iwgetid -r)
+# IP=$(ip addr show $INTERFACE | grep "inet " | awk '{print $2}' | cut -d "/" -f1)
 
 echo $SSID $QUALITY%	# full text
 echo $QUALITY%		# short text
